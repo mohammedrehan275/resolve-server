@@ -25,6 +25,11 @@ const app = express();
 
 app.use(express.json());
 
+const cors = require('cors');
+app.use(cors({
+    origin: '*'
+}));
+
 app.listen(port, () => {
     console.log(`Server Started at ${port}`)
 })
