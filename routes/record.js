@@ -2,13 +2,15 @@ const express = require("express");
 
 const router = express.Router();
 
-const User = require("../models/User");
+const Ticket = require("../models/Ticket");
 
 //Post Method
 router.post("/post", async (req, res) => {
-  const data = new User({
-    name: req.body.name,
-    age: req.body.age,
+  const data = new Ticket({
+    title: req.body.title,
+    description: req.body.description,
+    assignee: req.body.assignee,
+    labels: req.body.labels
   });
   try {
     const dataToSave = await data.save();
@@ -21,7 +23,7 @@ router.post("/post", async (req, res) => {
 //Get all Method
 router.get("/getAll", async (req, res) => {
   try {
-    const data = await User.find();
+    const data = await Ticket.find();
     res.json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });
